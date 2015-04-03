@@ -14,6 +14,19 @@ feature 'Sign Up', :devise do
     expect(page).to have_content(/.*#{txts[0]}.*|.*#{txts[1]}.*/)
   end
 
+  # Scenario: Visitor is sent confirm account email message after signing up
+  #    Given I am not signed in
+  #    When I sign up
+  #    Then I receive confirm account email
+  scenario 'visitor is sent confirm account email message after signing up' do
+    sign_up_with('test@example.com', 'please123', 'please123')
+    email = ActionMailer::Base.deliveries.first
+    expect(email).not_to eq(nil)
+    expect(email).to deliver_to('test@example.com')
+    expect(email).to have_subject(I18n.t 'devise.mailer.confirmation_instructions.subject')
+    expect(email).to have_body_text(/Confirm my account/)
+  end
+
   # Scenario: Visitor cannot sign up with invalid email address
   #   Given I am not signed in
   #   When I sign up with an invalid email address
