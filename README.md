@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/theeban275/my-rails-template.svg?branch=master)](https://travis-ci.org/theeban275/my-rails-template)
+
 Myapp
 ================
 
