@@ -8,4 +8,4 @@ default: &default
   database: myapp_travis
 
 test:
-  << *default
+    <<: *default
