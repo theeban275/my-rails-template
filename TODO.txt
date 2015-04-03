@@ -1,0 +1,11 @@
+Missing Features
+  - Administering users
+    - list users
+    - edit users
+    - delete users
+  - Users
+    - editing validation errors
+    - change password
+    - cancel account
+    - reset forgotten password
+    - restrict access to secure pages
