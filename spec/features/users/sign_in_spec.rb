@@ -4,9 +4,6 @@
 #   So I can visit protected areas of the site
 feature 'Sign in', :devise do
 
-  let(:email) { 'john.smith@example.com' }
-  let(:password) { 'Pas$w0rd' }
-
   Given(:user) { create(:user) }
 
   describe 'user can sign in with valid credentials' do
