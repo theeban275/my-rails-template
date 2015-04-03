@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/theeban275/my-rails-template.svg?branch=master)](https://travis-ci.org/theeban275/my-rails-template)
-
-Myapp
+Myapp [![Build Status](https://travis-ci.org/theeban275/my-rails-template.svg?branch=master)](https://travis-ci.org/theeban275/my-rails-template)
 ================
 
 This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
