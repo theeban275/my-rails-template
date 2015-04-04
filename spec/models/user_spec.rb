@@ -14,7 +14,7 @@ describe User do
     describe '#name' do
       context 'when blank' do
         let(:name) { '' }
-        it { expect(user.errors[:name]).to include("can't be blank") }
+        it { expect(user.errors[:name]).to eq(["can't be blank"]) }
       end
 
       context 'when equal to max name length' do
@@ -31,7 +31,7 @@ describe User do
     describe '#email' do
       context 'when blank' do
         let(:email) { '' }
-        it { expect(user.errors[:email]).to include("can't be blank") }
+        it { expect(user.errors[:email]).to eq(["can't be blank"]) }
       end
 
       context 'when equal to max email length' do
@@ -46,7 +46,7 @@ describe User do
 
       context 'when not valid' do
         let(:email) { 'not an email' }
-        it { expect(user.errors[:email]).to include("is invalid") }
+        it { expect(user.errors[:email]).to eq(["is invalid"]) }
       end
     end
 
@@ -54,7 +54,7 @@ describe User do
       context 'when blank' do
         let(:password) { '' }
         let(:password_confirmation) { password }
-        it { expect(user.errors[:password]).to include("can't be blank") }
+        it { expect(user.errors[:password]).to eq(["can't be blank"]) }
       end
 
       context 'when less than password min length' do
