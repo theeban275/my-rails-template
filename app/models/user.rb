@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :email, length: { in: email_length }, allow_blank: true
   validates :email, format: { with: /\A[a-zA-Z0-9_\.+\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+\z/ }, allow_blank: true
+  validates :email, uniqueness: true, allow_blank: true
   validates :password, presence: true, if: 'encrypted_password.blank?'
   validates :password, length: { in: password_length }, allow_blank: true
   validates :password, confirmation: true, allow_blank: true

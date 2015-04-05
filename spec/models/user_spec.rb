@@ -58,6 +58,14 @@ describe User do
         let(:email) { 'not an email' }
         it { expect(user.errors[:email]).to eq(["is invalid"]) }
       end
+
+      context 'when email already exists' do
+        subject(:user) do
+          FactoryGirl.create(:user, email: email)
+          FactoryGirl.build(:user, email: email)
+        end
+        it { expect(user.errors[:email]).to eq(["has already been taken"]) }
+      end
     end
 
     describe '#password' do
