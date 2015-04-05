@@ -11,6 +11,11 @@ describe User do
   let(:min_password_length) { User.password_length.first }
   let(:max_password_length) { User.password_length.last }
 
+  def extend_string(string, length)
+    s = string || 'a'
+    s + s.last * (length - s.length)
+  end
+
   describe 'validations' do
     before { user.valid? }
 
@@ -23,12 +28,12 @@ describe User do
       end
 
       context 'when equal to max name length' do
-        let(:name) { 'a' * max_name_length }
+        let(:name) { extend_string('John Smith', max_name_length) }
         it { expect(user).to be_valid }
       end
 
       context 'when greater than max name length' do
-        let(:name) { 'a' * (max_name_length + 1) }
+        let(:name) { extend_string('John Smith', max_name_length + 1) }
         it { expect(user.errors[:name]).to eq(["is too long (maximum is #{max_name_length} characters)"]) }
       end
     end
@@ -40,12 +45,12 @@ describe User do
       end
 
       context 'when equal to max email length' do
-        let(:email) { 'a@a.com' + 'a' * (max_email_length - 7) }
+        let(:email) { extend_string('john.smith@example.com', max_email_length)}
         it { expect(user).to be_valid }
       end
 
       context 'when greater than max email length' do
-        let(:email) { 'a@a.com' + 'a' * (max_email_length - 7 + 1) }
+        let(:email) { extend_string('john.smith@example.com', max_email_length + 1) }
         it { expect(user.errors[:email]).to eq(["is too long (maximum is #{max_email_length} characters)"]) }
       end
 
@@ -63,25 +68,25 @@ describe User do
       end
 
       context 'when less than password min length' do
-        let(:password) { 'a' * (min_password_length - 1) }
+        let(:password) { extend_string('a', min_password_length - 1)}
         let(:password_confirmation) { password }
         it { expect(user.errors[:password]).to eq(["is too short (minimum is #{min_password_length} characters)"]) }
       end
 
       context 'when equal to password min length' do
-        let(:password) { 'a' * min_password_length }
+        let(:password) { extend_string('a', min_password_length) }
         let(:password_confirmation) { password }
         it { expect(user).to be_valid }
       end
 
       context 'when equal to password max length' do
-        let(:password) { 'a' * max_password_length }
+        let(:password) { extend_string('a', max_password_length) }
         let(:password_confirmation) { password }
         it { expect(user).to be_valid }
       end
 
       context 'when greater than password max length' do
-        let(:password) { 'a' * (max_password_length + 1) }
+        let(:password) { extend_string('a', max_password_length + 1) }
         let(:password_confirmation) { password }
         it { expect(user.errors[:password]).to eq(["is too long (maximum is #{max_password_length} characters)"]) }
       end
