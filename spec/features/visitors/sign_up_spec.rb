@@ -36,7 +36,7 @@ feature 'Sign Up', :devise do
   # Scenario: Visitor cannot sign up when email address has errors
   #   Given I am not signed in
   #   When I sign up with an invalid email address
-  #   Then I see an invalid email message
+  #   Then I see an 'invalid email' message
   context 'with invalid email address' do
     let(:email) { 'bogus' }
     scenario 'visitor cannot sign up when email address has errors' do
@@ -47,7 +47,7 @@ feature 'Sign Up', :devise do
   # Scenario: Visitor cannot sign up when password has errors
   #   Given I am not signed in
   #   When I sign up without a password
-  #   Then I see a missing password message
+  #   Then I see a 'missing password' message
   context 'with blank password' do
     let(:password) { '' }
     scenario 'visitor cannot sign up when password has errors' do
@@ -58,7 +58,7 @@ feature 'Sign Up', :devise do
   # Scenario: Visitor cannot sign up when password confirmation has errors
   #   Given I am not signed in
   #   When I sign up without a password confirmation
-  #   Then I see a missing password confirmation message
+  #   Then I see a 'missing password confirmation' message
   context 'with blank password confirmation' do
     let(:password_confirmation) { '' }
     scenario 'visitor cannot sign up when password confirmation has errors' do

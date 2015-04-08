@@ -3,6 +3,7 @@
 #   I want to edit my user profile
 #   So I can change my details
 feature 'User edit', :devise do
+  include Features::ConfirmAccountHelpers
 
   describe 'Edit details' do
 
@@ -34,13 +35,8 @@ feature 'User edit', :devise do
       expect(page).to have_content I18n.t 'devise.sessions.signed_in'
     end
 
-    def confirm_account
-      open_last_email
-      click_first_link_in_email
-    end
-
     # Scenario: User changes name
-    #   Given I am signed in
+    #   Given I am on the edit profile page
     #   When I enter in new name
     #   Then I see an account updated message
     context 'new name is entered' do
@@ -51,9 +47,9 @@ feature 'User edit', :devise do
     end
 
     # Scenario: User cannot change name if name has errors
-    #   Given I am signed in
+    #   Given I am on the edit profile page
     #   When I enter in blank name
-    #   Then I see 'update error' message
+    #   Then I see "name can't be blank" message
     context 'new name is entered but has errors' do
       let(:new_name) { '' }
       scenario 'user cannot change name' do
@@ -63,7 +59,7 @@ feature 'User edit', :devise do
     end
 
     # Scenario: User changes email address
-    #   Given I am signed in
+    #   Given I am on the edit profile page
     #   When I enter in new email address
     #   Then I see an account updated message
     #   And I am sent confirm account to new email address
@@ -74,15 +70,15 @@ feature 'User edit', :devise do
       scenario 'user changes email address' do
         expect(page).to have_content(/#{I18n.t( 'devise.registrations.update_needs_confirmation')}/)
         expect(open_last_email).to deliver_to(new_email)
-        confirm_account
+        click_confirm_account_link
         expect_resign_in(new_email, password)
       end
     end
 
     # Scenario: User cannot change email address if email address has errors
-    #   Given I am signed in
+    #   Given I am on the edit profile page
     #   When I enter in blank email address
-    #   Then I see 'update error' message
+    #   Then I see "email can't be blank" message
     context 'new email is entered but has errors' do
       let(:new_email) { '' }
       scenario 'user cannot change email address' do
@@ -92,7 +88,7 @@ feature 'User edit', :devise do
     end
 
     # Scenario: User changes password
-    #   Given I am signed in
+    #   Given I am on the edit profile page
     #   When I enter in new password
     #   Then I see an account updated message
     #   Then I can login with new password
@@ -106,9 +102,9 @@ feature 'User edit', :devise do
     end
 
     # Scenario: User cannot change password if password has errors
-    #   Given I am signed in
-    #   When I enter in blank email address
-    #   Then I see 'update error' message
+    #   Given I am on the edit profile page
+    #   And I enter in different password confirmation
+    #   Then I see "password confirmation doesn't match" message
     context 'password not valid' do
       let(:new_password) { 'please123' }
       let(:new_password_confirmation) { 'Pas$word' }
@@ -118,6 +114,11 @@ feature 'User edit', :devise do
       end
     end
 
+    # Scenario: User cannot make changes if current password is blank
+    #   Given I am on the edit profile page
+    #   And I update details
+    #   And I enter in wrong current password
+    #   Then I see "current password is blank" message
     context 'current password is incorrect' do
       let(:new_name) { 'Jason Smith' }
       let(:new_email) { 'jason.smith@example.com' }
