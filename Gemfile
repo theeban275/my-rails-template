@@ -49,7 +49,8 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', require: false
+  gem 'poltergeist', require: false
 end
 gem 'pg'
 gem 'pry-rails'

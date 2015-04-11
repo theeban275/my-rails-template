@@ -13,7 +13,7 @@ feature 'Cancel account', :devise do
     sign_in(user.email, user.password)
     visit edit_user_registration_path(user)
     click_button 'Cancel my account'
-    page.driver.browser.switch_to.alert.accept
+    #page.driver.browser.switch_to.alert.accept
     expect(page).to have_content I18n.t 'devise.registrations.destroyed'
   end
 
