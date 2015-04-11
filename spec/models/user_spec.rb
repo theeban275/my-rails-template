@@ -98,13 +98,14 @@ describe User do
         let(:password_confirmation) { password }
         it { expect(user.errors[:password]).to eq(["is too long (maximum is #{max_password_length} characters)"]) }
       end
+    end
 
-      # FIXME bug with validation for confirmation not working
-      #context 'when confirmation not equal' do
-        #let(:password) { 'Pas$w0rd' }
-        #let(:password_confirmation) { '' }
-        #it { expect(user.errors[:password]).to include("") }
-      #end
+    describe '#password_confirmation' do
+      context 'when confirmation not equal' do
+        let(:password) { 'Pas$w0rd' }
+        let(:password_confirmation) { '' }
+        it { expect(user.errors[:password_confirmation]).to include("doesn't match Password") }
+      end
     end
   end
 
