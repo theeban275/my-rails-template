@@ -1,8 +1,8 @@
-# Feature: User edit
+# Feature: Edit profile
 #   As a user
 #   I want to edit my user profile
 #   So I can change my details
-feature 'User edit', :devise do
+feature 'Edit profile', :devise do
   include Features::ConfirmAccountHelpers
 
   describe 'Edit details' do

@@ -1,8 +1,8 @@
-# Feature: User profile page
+# Feature: View profile
 #   As a user
 #   I want to visit my user profile page
 #   So I can see my personal account data
-feature 'User profile page', :devise do
+feature 'View profile', :devise do
 
   # Scenario: User sees own profile
   #   Given I am signed in

@@ -1,8 +1,8 @@
-# Feature: User delete
+# Feature: Cancel account
 #   As a user
 #   I want to delete my user profile
 #   So I can close my account
-feature 'User delete', :devise do
+feature 'Cancel account', :devise do
 
   # Scenario: User can delete own account
   #   Given I am signed in
